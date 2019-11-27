@@ -1,11 +1,11 @@
-/****************************************************************************** 
+/******************************************************************************
 fontlargenumber.h
 Definition for large font
 
 This file was imported from the MicroView library, written by GeekAmmo
-(https://github.com/geekammo/MicroView-Arduino-Library), and released under 
-the terms of the GNU General Public License as published by the Free Software 
-Foundation, either version 3 of the License, or (at your option) any later 
+(https://github.com/geekammo/MicroView-Arduino-Library), and released under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
 version.
 
 This program is distributed in the hope that it will be useful,
@@ -21,11 +21,15 @@ Emil Varughese @ Edwin Robotics Pvt. Ltd.
 July 27, 2015
 https://github.com/emil01/SparkFun_Micro_OLED_Arduino_Library/
 
+Modified by:
+Andreas Taylor to make compatible with Energia IDE (TI MSP microcontrollers)
+https://github.com/Andy4495/SparkFun_Micro_OLED_Arduino_Library
+
 ******************************************************************************/
 #ifndef FONTLARGENUMBER_H
 #define FONTLARGENUMBER_H
 
-#if defined(__AVR__) || defined(__arm__) || defined(__ARDUINO_ARC__)
+#if defined(__AVR__) || defined(__arm__) || defined(__ARDUINO_ARC__) || defined(ENERGIA)
 	#include <avr/pgmspace.h>
 #else
 	#include <pgmspace.h>
@@ -83,6 +87,6 @@ static const unsigned char fontlargenumber[] PROGMEM = {
 	0x7F, 0x7C, 0x7C, 0x3F, 0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x7F, 0x7F, 0x00, 0x00, 0x00, 0x00,
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x1F, 0x3F, 0x7E, 0x7C, 0x7E, 0x3F, 0x1F, 0x01, 0x00, 0x00,
 	0x00, 0x00, 0x3E, 0x7C, 0x7C, 0x7E, 0x3F, 0x0F, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-	0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+	0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 };
 #endif

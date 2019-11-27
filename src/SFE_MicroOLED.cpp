@@ -11,6 +11,9 @@ Emil Varughese @ Edwin Robotics Pvt. Ltd.
 July 27, 2015
 https://github.com/emil01/SparkFun_Micro_OLED_Arduino_Library/
 
+Modified by:
+Andreas Taylor to make compatible with Energia IDE (TI MSP microcontrollers)
+https://github.com/Andy4495/SparkFun_Micro_OLED_Arduino_Library
 This file defines the hardware interface(s) for the Micro OLED Breakout. Those
 interfaces include SPI, I2C and a parallel bus.
 
@@ -34,7 +37,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ******************************************************************************/
 #include <Arduino.h>
-#if defined(__AVR__) || defined(__arm__) || defined(__ARDUINO_ARC__)
+#if defined(__AVR__) || defined(__arm__) || defined(__ARDUINO_ARC__) || defined(ENERGIA)
 	#include <avr/pgmspace.h>
 #else
 	#include <pgmspace.h>

@@ -1,11 +1,11 @@
-/****************************************************************************** 
+/******************************************************************************
 font8x16.h
 Definition for medium font
 
 This file was imported from the MicroView library, written by GeekAmmo
-(https://github.com/geekammo/MicroView-Arduino-Library), and released under 
-the terms of the GNU General Public License as published by the Free Software 
-Foundation, either version 3 of the License, or (at your option) any later 
+(https://github.com/geekammo/MicroView-Arduino-Library), and released under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
 version.
 
 This program is distributed in the hope that it will be useful,
@@ -20,11 +20,15 @@ Modified by:
 Emil Varughese @ Edwin Robotics Pvt. Ltd.
 July 27, 2015
 https://github.com/emil01/SparkFun_Micro_OLED_Arduino_Library/
+
+Modified by:
+Andreas Taylor to make compatible with Energia IDE (TI MSP microcontrollers)
+https://github.com/Andy4495/SparkFun_Micro_OLED_Arduino_Library
 ******************************************************************************/
 #ifndef FONT8X16_H
 #define FONT8X16_H
 
-#if defined(__AVR__) || defined(__arm__) || defined(__ARDUINO_ARC__)
+#if defined(__AVR__) || defined(__arm__) || defined(__ARDUINO_ARC__) || defined(ENERGIA)
 	#include <avr/pgmspace.h>
 #else
 	#include <pgmspace.h>
@@ -32,7 +36,7 @@ https://github.com/emil01/SparkFun_Micro_OLED_Arduino_Library/
 
 static const unsigned char font8x16[] PROGMEM = {
 	// first row defines - FONTWIDTH, FONTHEIGHT, ASCII START CHAR, TOTAL CHARACTERS, FONT MAP WIDTH HIGH, FONT MAP WIDTH LOW (2,56 meaning 256)
-	8,16,32,96,2,56,		
+	8,16,32,96,2,56,
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFE, 0x00, 0x00, 0x00, 0x00,
 	0x00, 0x00, 0x0E, 0x00, 0x0E, 0x00, 0x00, 0x00, 0x00, 0xD0, 0xBE, 0x90, 0xD0, 0xBE, 0x90, 0x00,
 	0x00, 0x1C, 0x62, 0xFF, 0xC2, 0x80, 0x00, 0x00, 0x0C, 0x12, 0x92, 0x4C, 0xB0, 0x88, 0x06, 0x00,
@@ -131,4 +135,3 @@ static const unsigned char font8x16[] PROGMEM = {
 	0x01, 0x00, 0x00, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
 #endif
-

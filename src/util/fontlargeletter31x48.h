@@ -1,4 +1,4 @@
-/****************************************************************************** 
+/******************************************************************************
 fontlargeletter.h
 Definition for large letter only font
 
@@ -15,11 +15,15 @@ DaAwesomeP
 August 13, 2015
 https://github.com/DaAwesomeP/SparkFun_Micro_OLED_Arduino_Library/
 
+Modified by:
+Andreas Taylor to make compatible with Energia IDE (TI MSP microcontrollers)
+https://github.com/Andy4495/SparkFun_Micro_OLED_Arduino_Library
+
 ******************************************************************************/
 
 #ifndef FONTLARGELETTER31X48_H
 #define FONTLARGELETTER31X48_H
-#if defined(__AVR__) || defined(__arm__) || defined(__ARDUINO_ARC__)
+#if defined(__AVR__) || defined(__arm__) || defined(__ARDUINO_ARC__) || defined(ENERGIA)
 	#include <avr/pgmspace.h>
 #else
 	#include <pgmspace.h>
@@ -701,6 +705,6 @@ static const unsigned char fontlargeletter31x48 [] PROGMEM = {
     0x1E, 0x1F, 0x0F, 0x07, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00,
 };
 #endif

@@ -1,11 +1,11 @@
-/****************************************************************************** 
+/******************************************************************************
 font5x7.h
 Definition for small font
 
 This file was imported from the MicroView library, written by GeekAmmo
-(https://github.com/geekammo/MicroView-Arduino-Library), and released under 
-the terms of the GNU General Public License as published by the Free Software 
-Foundation, either version 3 of the License, or (at your option) any later 
+(https://github.com/geekammo/MicroView-Arduino-Library), and released under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
 version.
 
 This program is distributed in the hope that it will be useful,
@@ -21,11 +21,15 @@ Emil Varughese @ Edwin Robotics Pvt. Ltd.
 July 27, 2015
 https://github.com/emil01/SparkFun_Micro_OLED_Arduino_Library/
 
+Modified by:
+Andreas Taylor to make compatible with Energia IDE (TI MSP microcontrollers)
+https://github.com/Andy4495/SparkFun_Micro_OLED_Arduino_Library
+
 ******************************************************************************/
 #ifndef FONT5X7_H
 #define FONT5X7_H
 
-#if defined(__AVR__) || defined(__arm__) || defined(__ARDUINO_ARC__)
+#if defined(__AVR__) || defined(__arm__) || defined(__ARDUINO_ARC__) || defined(ENERGIA)
 	#include <avr/pgmspace.h>
 #else
 	#include <pgmspace.h>

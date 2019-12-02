@@ -16,7 +16,7 @@ Andreas Taylor to make compatible with Energia IDE (TI MSP microcontrollers)
 https://github.com/Andy4495/SparkFun_Micro_OLED_Arduino_Library
 
 This file defines the hardware interface(s) for the Micro OLED Breakout. Those
-interfaces include SPI, I2C and a parallel bus.
+interfaces include SPI, I2C and a parallel (8080-series) bus.
 
 Development environment specifics:
 Arduino 1.0.5

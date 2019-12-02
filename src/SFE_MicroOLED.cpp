@@ -14,8 +14,9 @@ https://github.com/emil01/SparkFun_Micro_OLED_Arduino_Library/
 Modified by:
 Andreas Taylor to make compatible with Energia IDE (TI MSP microcontrollers)
 https://github.com/Andy4495/SparkFun_Micro_OLED_Arduino_Library
+
 This file defines the hardware interface(s) for the Micro OLED Breakout. Those
-interfaces include SPI, I2C and a parallel bus.
+interfaces include SPI, I2C and a parallel (8080-series) bus.
 
 Development environment specifics:
 Arduino 1.0.5
@@ -178,7 +179,7 @@ MicroOLED::MicroOLED(uint8_t rst, uint8_t dc)
 		i2c_address = I2C_ADDRESS_SA0_0;
 }
 
-/** \brief MicroOLED Constructor -- Parallel Mode
+/** \brief MicroOLED Constructor -- Parallel Mode 8080-series
 
 	Setup the MicroOLED class, configure the display to be controlled via a
 	parallel interface.
@@ -187,7 +188,7 @@ MicroOLED::MicroOLED(uint8_t rst, uint8_t dc, uint8_t cs, uint8_t wr, uint8_t rd
 					uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
 					uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7)
 {
-	interface = MODE_PARALLEL;	// Set to parallel mode
+	interface = MODE_PARALLEL;	// Set to parallel mode 8080-series
 	// Assign pin parameters to private class variables.
 	rstPin = rst;
 	dcPin = dc;
@@ -214,7 +215,12 @@ void MicroOLED::begin()
 
 	// Set up the selected interface:
 	if (interface == MODE_SPI)
+#if defined(__TM4C1294NCPDT__)
+#warning TM4C detected SPI not supported
+    ;
+#else
 		spiSetup();
+#endif
 	else if (interface == MODE_I2C)
 		i2cSetup();
 	else if (interface == MODE_PARALLEL)
@@ -278,8 +284,13 @@ void MicroOLED::command(uint8_t c) {
 
 	if (interface == MODE_SPI)
 	{
+#if defined(__TM4C1294NCPDT__)
+#warning TM4C detected SPI not supported
+    ;
+#else
 		digitalWrite(dcPin, LOW);;	// DC pin LOW for a command
 		spiTransfer(c);			// Transfer the command byte
+#endif
 	}
 	else if (interface == MODE_I2C)
 	{
@@ -305,9 +316,14 @@ void MicroOLED::data(uint8_t c) {
 
 	if (interface == MODE_SPI)
 	{
+#if defined(__TM4C1294NCPDT__)
+#warning TM4C detected SPI not supported
+    ;
+#else
 		digitalWrite(dcPin, HIGH);	// DC HIGH for a data byte
 
 		spiTransfer(c); 		// Transfer the data byte
+#endif
 	}
 	else if (interface == MODE_I2C)
 	{

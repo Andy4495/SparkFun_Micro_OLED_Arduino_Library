@@ -1,4 +1,4 @@
-/****************************************************************************** 
+/******************************************************************************
 hardware.cpp
 MicroOLED Arduino Library Hardware Interface
 
@@ -11,8 +11,12 @@ Emil Varughese @ Edwin Robotics Pvt. Ltd.
 July 27, 2015
 https://github.com/emil01/SparkFun_Micro_OLED_Arduino_Library/
 
+Modified by:
+Andreas Taylor to make compatible with Energia IDE (TI MSP microcontrollers)
+https://github.com/Andy4495/SparkFun_Micro_OLED_Arduino_Library
+
 This file defines the hardware interface(s) for the Micro OLED Breakout. Those
-interfaces include SPI, I2C and a parallel bus.
+interfaces include SPI, I2C and a parallel bus (8080-series).
 
 Development environment specifics:
 Arduino 1.0.5
@@ -20,9 +24,9 @@ Arduino Pro 3.3V
 Micro OLED Breakout v1.0
 
 This code was heavily based around the MicroView library, written by GeekAmmo
-(https://github.com/geekammo/MicroView-Arduino-Library), and released under 
-the terms of the GNU General Public License as published by the Free Software 
-Foundation, either version 3 of the License, or (at your option) any later 
+(https://github.com/geekammo/MicroView-Arduino-Library), and released under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
 version.
 
 This program is distributed in the hope that it will be useful,
@@ -35,11 +39,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ******************************************************************************/
 
 #include "SFE_MicroOLED.h"
+#if defined(__TM4C1294NCPDT__)
+#warning TM4C detected SPI not supported
+#else
 #include <SPI.h>
+#endif
 #include <Wire.h>
 
 #define I2C_FREQ 400000L	// I2C Frequency is 400kHz (fast as possible)
 
+#if defined(__TM4C1294NCPDT__)
+#warning TM4C detected SPI not supported
+#else
 // Configure SPI settings - Max clk frequency for display is 10MHz
 SPISettings oledSettings(10000000, MSBFIRST, SPI_MODE0);
 
@@ -55,7 +66,7 @@ void MicroOLED::spiSetup()
 	pinMode(SCK, OUTPUT);	// SCK is an OUTPUT
 	pinMode(csPin, OUTPUT);	// CS is an OUTPUT
 	digitalWrite(csPin, HIGH);	// Start CS High
-	
+
 #if defined(__AVR__)
 	pinMode(10, OUTPUT); // Required for setting into Master mode
 #endif
@@ -71,10 +82,11 @@ void MicroOLED::spiTransfer(byte data)
 {
 	SPI.beginTransaction(oledSettings);
 	digitalWrite(csPin, LOW);
-	SPI.transfer(data);	
+	SPI.transfer(data);
 	digitalWrite(csPin, HIGH);
 	SPI.endTransaction();
 }
+#endif
 
 /** \brief Initialize the I2C Interface
 
@@ -100,10 +112,10 @@ void MicroOLED::i2cWrite(byte address, byte dc, byte data)
 	Wire.endTransmission();
 }
 
-/** \brief Set up Parallel Interface
+/** \brief Set up Parallel Interface 8080-series
 
 	This function initializes all of the pins used in the
-	parallel interface.
+	parallel interface 8080-series.
 **/
 void MicroOLED::parallelSetup()
 {
@@ -120,7 +132,7 @@ void MicroOLED::parallelSetup()
 		pinMode(dPins[i], OUTPUT);
 }
 
-/** \brief Write a byte over the parallel interface
+/** \brief Write a byte over the parallel interface 8080-series
 
 	This function will both set the DC pin, depending on whether a data or
 	command byte is being sent, and it will toggle the WR, RD and data pins
@@ -132,16 +144,16 @@ void MicroOLED::parallelWrite(byte data, byte dc)
 	//digitalWrite(csPin, HIGH);
 	//digitalWrite(wrPin, HIGH);
 	//digitalWrite(rdPin, HIGH);
-	
+
 	// chip select high->low
 	digitalWrite(csPin, LOW);
-	
+
 	// dc high or low
 	digitalWrite(dcPin, dc);
-	
+
 	// wr high->low
 	digitalWrite(wrPin, LOW);
-	
+
 	// set data pins
 	for (int i=0; i<8; i++)
 	{
@@ -150,11 +162,10 @@ void MicroOLED::parallelWrite(byte data, byte dc)
 		else
 			digitalWrite(dPins[i], LOW);
 	}
-	
+
 	// wr low->high
 	digitalWrite(wrPin, HIGH);
-		
+
 	// cs high
 	digitalWrite(csPin, HIGH);
 }
-

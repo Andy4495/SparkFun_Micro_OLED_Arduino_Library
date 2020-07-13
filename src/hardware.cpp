@@ -68,7 +68,7 @@ void MicroOLED::spiSetup()
 	digitalWrite(csPin, HIGH);	// Start CS High
 
 #if defined(__AVR__)
-	pinMode(10, OUTPUT); // Required for setting into Master mode
+	pinMode(10, OUTPUT); // Required for setting into Controller mode
 #endif
 	SPI.begin();
 }
